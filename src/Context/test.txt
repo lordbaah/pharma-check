@@ -1,0 +1,56 @@
+import React, { createContext, useState, useCallback, useRef } from "react";
+import { getRequest } from "../utilis/Fetch";
+
+export const DrugsContext = createContext();
+
+const DrugsProvider = ({ children }) => {
+  const [drugs, setDrugs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const fetchingRef = useRef(false);
+
+  const fetchDrugsByName = useCallback(async (name) => {
+    console.log("fetchDrugsByName called with name:", name);
+    if (!name || fetchingRef.current) {
+      console.log("Skipping fetch: No name provided or already fetching");
+      return;
+    }
+
+    fetchingRef.current = true;
+    setLoading(true);
+    setError(null);
+
+    try {
+      console.log("Fetching data from API");
+      const drugsData = await getRequest(
+        `http://localhost:3000/search/name/${name}`
+      );
+      console.log("Received data:", drugsData);
+      setDrugs(drugsData);
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      setError(err.message);
+    } finally {
+      console.log("Setting loading to false");
+      setLoading(false);
+      fetchingRef.current = false;
+    }
+  }, []);
+
+  console.log(
+    "DrugsProvider render - Loading:",
+    loading,
+    "Drugs:",
+    drugs,
+    "Error:",
+    error
+  );
+
+  return (
+    <DrugsContext.Provider value={{ drugs, loading, error, fetchDrugsByName }}>
+      {children}
+    </DrugsContext.Provider>
+  );
+};
+
+export default DrugsProvider;
