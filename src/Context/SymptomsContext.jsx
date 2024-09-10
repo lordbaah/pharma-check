@@ -1,5 +1,5 @@
 import React, { createContext, useState, useCallback, useRef } from "react";
-import { getRequest, url } from "../api/Fetch";
+import { getRequest } from "../api/Fetch";
 
 // Create the context for symptom-based drug search
 export const SymptomsContext = createContext();
@@ -25,7 +25,7 @@ const SymptomsProvider = ({ children }) => {
     try {
       // console.log("Fetching data from API");
       const drugsData = await getRequest(
-        `${url}/search?q=${encodeURIComponent(query)}`
+        `api/search?q=${encodeURIComponent(query)}`
       );
       // console.log("Received data:", drugsData);
       setDrugs(drugsData);

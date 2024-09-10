@@ -1,5 +1,5 @@
 import React, { createContext, useState, useCallback, useRef } from "react";
-import { getRequest, url } from "../api/Fetch";
+import { getRequest } from "../api/Fetch";
 
 export const DrugsContext = createContext();
 
@@ -20,7 +20,7 @@ const DrugsProvider = ({ children }) => {
     setError(null);
 
     try {
-      const drugsData = await getRequest(`${url}/search/name/${name}`);
+      const drugsData = await getRequest(`api/search/name/${name}`);
       setDrugsBySearch(drugsData); // Update only search results state
     } catch (err) {
       setError(err.message);
@@ -36,7 +36,7 @@ const DrugsProvider = ({ children }) => {
     setError(null);
 
     try {
-      const drugsData = await getRequest(`${url}`);
+      const drugsData = await getRequest(`api`);
 
       // Assuming that drugsData contains an array of drugs and each drug has a 'category' property
       const allCategories = drugsData.map((drug) => drug.category);
@@ -61,7 +61,7 @@ const DrugsProvider = ({ children }) => {
     setError(null);
 
     try {
-      const drugsData = await getRequest(`${url}/category/${categoryName}`);
+      const drugsData = await getRequest(`api/category/${categoryName}`);
       setDrugsByCategory(drugsData); // Update only category-filtered drugs state
     } catch (err) {
       setError(err.message);

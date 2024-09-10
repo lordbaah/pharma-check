@@ -8,7 +8,7 @@ export const getRequest = async (url) => {
   return response.json();
 };
 
-export const url = "https://pharma-check.onrender.com";
+// export const url = "https://pharma-check.onrender.com";
 // // export const url = "/api";
 // // export const url = "http://localhost:3000";
 // // console.log(url);
