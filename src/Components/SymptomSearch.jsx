@@ -64,9 +64,7 @@ const SymptomSearch = () => {
 
       {error && <p className="text-center">{error}</p>}
 
-      {hasSearched &&
-      fetchDrugsBySymptoms &&
-      fetchDrugsBySymptoms.length > 0 ? (
+      {hasSearched && drugs.length > 0 ? (
         <div className="w-full mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {drugs.map((drug, index) => (
             <DrugCard key={index} name={drug.drug} />
@@ -74,7 +72,8 @@ const SymptomSearch = () => {
         </div>
       ) : (
         hasSearched &&
-        !isSearching && <p className="text-center">No drug found.</p>
+        !isSearching &&
+        !loading && <p className="text-center">No drug found.</p>
       )}
     </div>
   );
