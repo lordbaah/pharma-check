@@ -9,12 +9,15 @@ const DrugPage = () => {
 
   useEffect(() => {
     if (name) {
-      // console.log("Fetching drug data");
+      console.log("Fetching drug data");
       fetchDrugsByName(name);
     }
   }, [name, fetchDrugsByName]);
 
+  console.log("Drugs by search:", drugsBySearch);
+
   const selectedDrug = drugsBySearch.length > 0 ? drugsBySearch[0] : null;
+  console.log("Selected drug:", selectedDrug);
 
   if (loading)
     return (
