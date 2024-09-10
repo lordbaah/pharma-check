@@ -7,3 +7,8 @@ export const getRequest = async (url) => {
 
   return response.json();
 };
+
+// const url = "http://localhost:3000";
+// const url = "https://pharma-check.onrender.com";
+
+export const url = "http://localhost:3000";

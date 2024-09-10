@@ -1,17 +1,27 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SymptomsContext } from "../Context/SymptomsContext";
 import DrugCard from "./DrugCard";
 import { CiSearch } from "react-icons/ci";
 
 const SymptomSearch = () => {
   const [query, setQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
   const { fetchDrugsBySymptoms, drugs, loading, error } =
     useContext(SymptomsContext);
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setIsSearching(true);
+    setHasSearched(true);
     fetchDrugsBySymptoms(query);
   };
+
+  useEffect(() => {
+    if (!loading && isSearching) {
+      setIsSearching(false);
+    }
+  }, [loading, isSearching]);
 
   return (
     <div className="custom-width mt-8 flex flex-col items-center">
@@ -34,7 +44,7 @@ const SymptomSearch = () => {
         </form>
       </div>
 
-      {loading && (
+      {isSearching && loading && (
         <div className="w-full mt-8">
           {[...Array(1)].map((_, index) => (
             <div
@@ -54,12 +64,17 @@ const SymptomSearch = () => {
 
       {error && <p className="text-center">{error}</p>}
 
-      {drugs && (
+      {hasSearched &&
+      fetchDrugsBySymptoms &&
+      fetchDrugsBySymptoms.length > 0 ? (
         <div className="w-full mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {drugs.map((drug, index) => (
             <DrugCard key={index} name={drug.drug} />
           ))}
         </div>
+      ) : (
+        hasSearched &&
+        !isSearching && <p className="text-center">No drug found.</p>
       )}
     </div>
   );

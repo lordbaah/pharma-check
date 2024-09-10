@@ -2,7 +2,7 @@ import SymptomSearch from "../Components/SymptomSearch";
 
 const SearchPage = () => {
   return (
-    <section className="mt-20 mb-8">
+    <section className="mt-20 mb-20">
       <SymptomSearch />
     </section>
   );

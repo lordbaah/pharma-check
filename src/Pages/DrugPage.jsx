@@ -9,7 +9,7 @@ const DrugPage = () => {
 
   useEffect(() => {
     if (name) {
-      console.log("Fetching drug data");
+      // console.log("Fetching drug data");
       fetchDrugsByName(name);
     }
   }, [name, fetchDrugsByName]);

@@ -3,7 +3,7 @@ import DrugSearch from "../Components/SearchDrugs";
 
 const HomePage = () => {
   return (
-    <section className="mt-20 mb-8">
+    <section className="mt-20 mb-20">
       <div className="custom-width">
         <div className="flex flex-col items-center gap-8 md:flex-row justify-between">
           <div>
@@ -23,9 +23,8 @@ const HomePage = () => {
             />
           </div>
         </div>
+        <DrugSearch />
       </div>
-
-      <DrugSearch />
     </section>
   );
 };

@@ -61,13 +61,13 @@ const DrugSearch = () => {
       {error && <p className="text-center">{error}</p>}
 
       {hasSearched && drugsBySearch && drugsBySearch.length > 0 ? (
-        <div className="w-full flex gap-4 items-center justify-center flex-wrap">
+        <div className="w-full text-center">
           {drugsBySearch.map((drug, index) => (
             // <DrugCard key={drug.id} name={drug.name} />
             <div key={index}>
-              <p>{drug.name}</p>
+              {/* <p>{drug.name}</p> */}
               <Link to={`/drug/${drug.name}`} className="text-blue-500">
-                view more
+                {drug.name}
               </Link>
             </div>
           ))}

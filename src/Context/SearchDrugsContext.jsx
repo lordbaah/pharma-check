@@ -1,8 +1,5 @@
 import React, { createContext, useState, useCallback, useRef } from "react";
-import { getRequest } from "../utilis/Fetch";
-
-// const url = "http://localhost:3000";
-const url = "https://pharma-check.onrender.com";
+import { getRequest, url } from "../utilis/Fetch";
 
 export const DrugsContext = createContext();
 
