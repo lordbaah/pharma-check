@@ -20,7 +20,7 @@ const DrugsProvider = ({ children }) => {
     setError(null);
 
     try {
-      const drugsData = await getRequest(`/search/name/${name}`);
+      const drugsData = await getRequest(`${url}/search/name/${name}`);
       setDrugsBySearch(drugsData); // Update only search results state
     } catch (err) {
       setError(err.message);
@@ -36,7 +36,7 @@ const DrugsProvider = ({ children }) => {
     setError(null);
 
     try {
-      const drugsData = await getRequest(`/`);
+      const drugsData = await getRequest(`${url}/`);
 
       // Assuming that drugsData contains an array of drugs and each drug has a 'category' property
       const allCategories = drugsData.map((drug) => drug.category);
@@ -61,7 +61,7 @@ const DrugsProvider = ({ children }) => {
     setError(null);
 
     try {
-      const drugsData = await getRequest(`/category/${categoryName}`);
+      const drugsData = await getRequest(`${url}/category/${categoryName}`);
       setDrugsByCategory(drugsData); // Update only category-filtered drugs state
     } catch (err) {
       setError(err.message);

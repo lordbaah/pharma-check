@@ -25,7 +25,7 @@ const SymptomsProvider = ({ children }) => {
     try {
       // console.log("Fetching data from API");
       const drugsData = await getRequest(
-        `/search?q=${encodeURIComponent(query)}`
+        `${url}/search?q=${encodeURIComponent(query)}`
       );
       // console.log("Received data:", drugsData);
       setDrugs(drugsData);
