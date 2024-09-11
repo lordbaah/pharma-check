@@ -1,18 +1,3 @@
-export const getRequest = async (url) => {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`HTTP error: Status ${response.status}`);
-  }
-
-  return response.json();
-};
-
-// export const url = "https://pharma-check.onrender.com";
-// // export const url = "/api";
-// // export const url = "http://localhost:3000";
-// // console.log(url);
-
 // export const getRequest = async (url) => {
 //   const response = await fetch(url);
 
@@ -20,15 +5,30 @@ export const getRequest = async (url) => {
 //     throw new Error(`HTTP error: Status ${response.status}`);
 //   }
 
-//   // Check the content type before attempting to parse JSON
-//   const contentType = response.headers.get("content-type");
-
-//   if (contentType && contentType.includes("application/json")) {
-//     return response.json();
-//   } else {
-//     // If the response is not JSON, return the raw text
-//     const textResponse = await response.text();
-//     console.log("Raw response: ", await response.text());
-//     throw new Error(`Response is not JSON: ${textResponse}`);
-//   }
+//   return response.json();
 // };
+
+// export const url = "https://pharma-check.onrender.com";
+// // export const url = "/api";
+// // export const url = "http://localhost:3000";
+// // console.log(url);
+
+export const getRequest = async (path) => {
+  const response = await fetch(`/api${path}`);
+
+  if (!response.ok) {
+    console.log("Response status:", response.status);
+    console.log("Response text:", await response.text());
+    throw new Error(`HTTP error: Status ${response.status}`);
+  }
+
+  const contentType = response.headers.get("content-type");
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+    return response.json();
+  } else {
+    throw new Error("Oops, we haven't got JSON!");
+  }
+};
+
+// Use empty string as base URL since we're using relative paths
+export const url = "";
